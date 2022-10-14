@@ -1,0 +1,36 @@
+
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+package order;
+
+service OrderService {
+  rpc createOrder (CreateOrderRequest) returns (CreateOrderResponse) {}
+  rpc ListOrder (ListOrderRequest) returns (ListOrderResponse) {}
+}
+
+message Order {
+  string id = 1;
+  string customer_id = 2;
+  int32 total = 3;
+  string shipping_address = 4;
+  google.protobuf.Timestamp created_at = 5;
+}
+
+message CreateOrderRequest {
+  string customer_id = 2;
+  int32 total = 3;
+  string shipping_address = 4;
+}
+
+message CreateOrderResponse {
+  Order order = 1;
+}
+
+message ListOrderRequest {
+  string customer_id = 1;
+}
+
+message ListOrderResponse {
+  repeated Order orders = 1;
+}
