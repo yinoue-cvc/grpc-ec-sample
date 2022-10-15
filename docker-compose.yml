@@ -15,8 +15,7 @@ services:
       - 8081:8081
     command: >
       bash -c "\
-      cp -r proto dist/proto \
-      && export npm_config_target_arch=x64 \
+      export npm_config_target_arch=x64 \
       && npm install \
       && npm run dev
       "
