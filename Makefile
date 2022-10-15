@@ -29,4 +29,6 @@ protogen:
 	&& cp -r ${OUTPUT} ../backend/proto \
 	&& rm -rf ../backend/dist/proto \
 	&& cp -r ${OUTPUT} ../backend/dist/proto \
+	&& rm -rf ../bff/dist/proto \
+	&& cp -r ${OUTPUT} ../bff/dist/proto \
 	"

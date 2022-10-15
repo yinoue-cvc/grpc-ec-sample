@@ -1,6 +1,25 @@
 version: "3.8"
 
 services:
+  bff:
+    container_name: bff
+    image: node:16
+    user: node
+    volumes:
+      - ./bff:/home/node/app
+    working_dir: /home/node/app
+    tty: true
+    networks:
+      - network
+    ports:
+      - 9000:9000
+    command: >
+      bash -c "\
+      export npm_config_target_arch=x64 \
+      && npm install \
+      && npm run dev
+      "
+  
   backend:
     container_name: backend
     image: node:16

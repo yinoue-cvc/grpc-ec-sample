@@ -1,6 +1,10 @@
 backend/node_modules
 backend/dist
+bff/node_modules
+bff/dist
 schema/node_modules
 
 .vscode
 *.code-workspace
+
+!.gitkeep
