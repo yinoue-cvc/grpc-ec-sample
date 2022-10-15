@@ -20,7 +20,8 @@ test:
 protogen:
 	docker run --rm -it -v ${PWD}:$(WORK_DIR) -w $(WORK_DIR)/schema node:16 \
 	/bin/bash -c "\
-	npm install \
+	export npm_config_target_arch=x64 \
+	&& npm install \
 	&& rm -rf $(OUTPUT) \
 	&& mkdir -p $(OUTPUT) \
 	&& $(COMMAND) \
