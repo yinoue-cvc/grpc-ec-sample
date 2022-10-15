@@ -1,14 +1,19 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const app = (0, express_1.default)();
-app.get('/', (req, res, next) => {
-    res.send('Hello, world!');
-    next();
-});
-app.listen(8081, () => {
-    console.log("Start on port 3000.");
-});
+console.log('test');
+const grpc_js_1 = require("@grpc/grpc-js");
+const order_grpc_pb_1 = require("./proto/order_grpc_pb");
+const startServer = () => {
+    const server = new grpc_js_1.Server();
+    const port = 8081;
+    server.addService(order_grpc_pb_1.OrderServiceService, {});
+    server.bindAsync(`0.0.0.0:${port}`, grpc_js_1.ServerCredentials.createInsecure(), (error, port) => {
+        if (error) {
+            console.error(error);
+            return;
+        }
+        server.start();
+        console.log(`server start, port: ${port}`);
+    });
+};
+startServer();

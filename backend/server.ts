@@ -1,11 +1,31 @@
-import express from "express"
-const app = express()
+console.log('test')
+import { 
+    Server,
+    ServerCredentials,
+} from '@grpc/grpc-js';
 
-app.get('/', (req: express.Request, res: express.Response, next: express.NextFunction) => {
-    res.send('Hello, world!')
-    next();
-})
+import { 
+    OrderServiceService, 
+} from './proto/order_grpc_pb';
 
-app.listen(8081, () => {
-    console.log("Start on port 3000.")
-})
+
+const startServer = () => {
+    const server = new Server();
+    const port = 8081;
+    server.addService(OrderServiceService, {});
+    server.bindAsync(
+        `0.0.0.0:${port}`,
+        ServerCredentials.createInsecure(),
+        (error, port) => {
+            if (error) {
+                console.error(error);
+                return;
+            }
+
+            server.start();
+            console.log(`server start, port: ${port}`);
+        }
+    )
+}
+
+startServer();

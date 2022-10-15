@@ -24,4 +24,8 @@ protogen:
 	&& rm -rf $(OUTPUT) \
 	&& mkdir -p $(OUTPUT) \
 	&& $(COMMAND) \
+	&& rm -rf ../backend/proto \
+	&& cp -r ${OUTPUT} ../backend/proto \
+	&& rm -rf ../backend/dist/proto \
+	&& cp -r ${OUTPUT} ../backend/dist/proto \
 	"
